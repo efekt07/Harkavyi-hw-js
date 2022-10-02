@@ -1,4 +1,9 @@
-/// <reference types="cypress"/>
+before(() => {
+    cy.visit('https://sanitarskyi-ngx-admin.herokuapp.com');
+        cy.get('[alt="Material Light Theme"]').click();
+        cy.get('.menu-icon.ng-tns-c141-9.ng-star-inserted').click();
+        cy.get('.menu-title.ng-tns-c141-11').click();
+})
 
 const params = [
     {arg: ['Yaroslav', 'Harkavyi', 'email1@gmail.com', 'website1.com'], expected: ['Yaroslav', 'Harkavyi', 'email1@gmail.com', 'website1.com']},
@@ -8,11 +13,6 @@ const params = [
 
 params.forEach(({arg, expected}) => {
     it(`Parametrized test with ${arg} params`, () => {
-        cy.visit('https://sanitarskyi-ngx-admin.herokuapp.com');
-        cy.get('[alt="Material Light Theme"]').click();
-        cy.get('.menu-icon.ng-tns-c141-9.ng-star-inserted').click();
-        cy.get('.menu-title.ng-tns-c141-11').click();
-    
         cy.get('#inputFirstName').clear().type(arg[0]);
         cy.get('#inputFirstName').should('contain.value', expected[0]);
 
